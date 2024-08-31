@@ -9,12 +9,12 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 200s linear;
   }
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #004628;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,36 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Left-Right-Div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-nav {
+  background-color: #004628;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(5px + 2vmin);
+  color: white;
+}
+
+.Nav-button {
+  border: none;
+  padding: calc(10px + 1vmin);
+  margin: calc(10px + 1vmin);
+  text-align: center;
+  text-decoration: none;
+  font-size: calc(5px + 2vmin);
+  color: white;
+  display: inline-block;
+  background-color: #012C1A;
 }
 
 .App-link {

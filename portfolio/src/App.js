@@ -4,20 +4,28 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <nav className='App-nav'>
+        <button className="Nav-button Home" onClick={() => {
+    alert('Home');
+  }}>Home</button>
+        <button className="Nav-button Projects" onClick={() => {
+    alert('Projects');
+  }}>Projects</button>
+        <button className="Nav-button Contact" onClick={() => {
+    alert('Contact');
+  }}>Contact</button>
+      </nav>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="Left-Right-Div">
+          <div className="Blurb-left">
+            <p>Hello</p>
+          </div>
+          <div className="Photo-right">
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+        </div>
       </header>
+
     </div>
   );
 }
