@@ -18,7 +18,7 @@ function App() {
       <header className="App-header">
         <div className="Left-Right-Div">
           <div className="Blurb-left">
-            <p>Hello</p>
+            <p>Hello, my name is Nicholas Salazar!  This is my first React App!</p>
           </div>
           <div className="Photo-right">
             <img src={logo} className="App-logo" alt="logo" />
