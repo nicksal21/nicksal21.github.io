@@ -1,3 +1,6 @@
+'use client'
+
+import Image from "next/image";
 import React, { useState } from 'react';
 import { BarChart3, LineChart, PieChart, AreaChart, Activity, Layers, TrendingUp, Database, BrainCircuit, BarChartHorizontal, Home, User, Mail, Menu, X } from 'lucide-react';
 
@@ -115,7 +118,7 @@ const DataSciencePortfolio = () => {
           {/* Desktop Navigation */}
           <nav style={{
             display: 'none',
-            '@media (min-width: 768px)': {
+            '@media (minWidth: 768px)': {
               display: 'flex'
             }
           }}>
@@ -161,7 +164,7 @@ const DataSciencePortfolio = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              '@media (min-width: 768px)': {
+              '@media (minWidth: 768px)': {
                 display: 'none'
               }
             }}
@@ -401,10 +404,10 @@ const HomePage = () => {
         display: 'grid', 
         gridTemplateColumns: 'repeat(1, 1fr)',
         gap: '24px',
-        '@media (min-width: 640px)': {
+        '@media (minWidth: 640px)': {
           gridTemplateColumns: 'repeat(2, 1fr)'
         },
-        '@media (min-width: 1024px)': {
+        '@media (minWidth: 1024px)': {
           gridTemplateColumns: 'repeat(3, 1fr)'
         }
       }}>
@@ -594,14 +597,14 @@ const AboutPage = () => {
         flexDirection: 'column',
         gap: '32px',
         marginBottom: '32px',
-        '@media (min-width: 768px)': {
+        '@media (minWidth: 768px)': {
           flexDirection: 'row'
         }
       }}>
         {/* Profile Image */}
         <div style={{
           flex: '0 0 280px',
-          '@media (min-width: 768px)': {
+          '@media (minWidth: 768px)': {
             flex: '0 0 320px'
           }
         }}>
@@ -633,7 +636,7 @@ const AboutPage = () => {
             display: 'grid',
             gridTemplateColumns: 'repeat(1, 1fr)',
             gap: '24px',
-            '@media (min-width: 640px)': {
+            '@media (minWidth: 640px)': {
               gridTemplateColumns: 'repeat(2, 1fr)'
             }
           }}>
@@ -769,7 +772,7 @@ const ContactPage = () => {
         display: 'grid',
         gridTemplateColumns: 'repeat(1, 1fr)',
         gap: '32px',
-        '@media (min-width: 768px)': {
+        '@media (minWidth: 768px)': {
           gridTemplateColumns: 'repeat(2, 1fr)'
         }
       }}>
