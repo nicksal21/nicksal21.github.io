@@ -112,7 +112,7 @@ const DataSciencePortfolio = () => {
               fontSize: '22px',
               fontWeight: 'bold',
               color: colors.text
-            }}>Nicholas Salazar's DataSci Portfolio</h1>
+            }}>Nicholas Salazarz&apos;s DataSci Portfolio</h1>
           </div>
 
           {/* Desktop Navigation */}
@@ -580,14 +580,14 @@ const AboutPage = () => {
           maxWidth: '700px',
           marginBottom: '16px'
         }}>
-          I'm a data scientist and web developer passionate about creating interactive data experiences. I specialize in building applications that make complex data accessible and actionable.
+          I&apos;m a data scientist and web developer passionate about creating interactive data experiences. I specialize in building applications that make complex data accessible and actionable.
         </p>
         <p style={{ 
           color: colors.textLight,
           fontSize: '16px',
           maxWidth: '700px'
         }}>
-          With a background in both computer science and statistics, I bridge the gap between robust analysis and user-friendly interfaces. I'm particularly interested in visualization techniques that reveal patterns and insights in large datasets.
+          With a background in both computer science and statistics, I bridge the gap between robust analysis and user-friendly interfaces. I&apos;m particularly interested in visualization techniques that reveal patterns and insights in large datasets.
         </p>
       </div>
 
@@ -1004,7 +1004,7 @@ const ContactPage = () => {
               marginBottom: '16px',
               lineHeight: '1.6'
             }}>
-              I'm currently available for freelance work and consulting. My typical response time is within 24 hours.
+              I&apos;m currently available for freelance work and consulting. My typical response time is within 24 hours.
             </p>
 
             <div style={{
