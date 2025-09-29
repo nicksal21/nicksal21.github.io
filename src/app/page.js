@@ -1,19 +1,21 @@
 'use client'
 
 import Image from "next/image";
-import React, { useState } from 'react';
-import { BarChart3, LineChart, PieChart, AreaChart, Activity, Layers, TrendingUp, Database, BrainCircuit, BarChartHorizontal, Home, User, Mail, Menu, X } from 'lucide-react';
+import Link from "next/link";
+import React, { useState, useEffect } from 'react';
+import { BarChart3, LineChart, PieChart, AreaChart, Activity, Layers, TrendingUp, Database, BrainCircuit, BarChartHorizontal, Home, User, Mail, Menu, X, Briefcase } from 'lucide-react';
+import projectsData from '@/data/projects.json';
 
 // Sage green color scheme
 const colors = {
-  primary: '#7D9D7F',      // Medium sage green
-  primaryDark: '#5A7A5C',  // Darker sage green
-  primaryLight: '#B0C4B1', // Lighter sage green
-  background: '#F7F9F7',   // Very light sage green background
-  text: '#2D3B2D',         // Dark green for text
-  textLight: '#4A5D4A',    // Medium green for secondary text
-  accent: '#D0E0D1',       // Very light sage for accents
-  border: '#C8D5C8',       // Light sage for borders
+  primary: '#7D9D7F',
+  primaryDark: '#5A7A5C',
+  primaryLight: '#B0C4B1',
+  background: '#F7F9F7',
+  text: '#2D3B2D',
+  textLight: '#4A5D4A',
+  accent: '#D0E0D1',
+  border: '#C8D5C8',
 };
 
 // Global styles
@@ -22,6 +24,16 @@ const globalStyles = {
   fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
   lineHeight: '1.5',
   color: colors.text,
+};
+
+// Icon mapping
+const iconMap = {
+  LineChart: LineChart,
+  Layers: Layers,
+  BrainCircuit: BrainCircuit,
+  TrendingUp: TrendingUp,
+  AreaChart: AreaChart,
+  BarChart3: BarChart3
 };
 
 // Consistent icon style
@@ -43,13 +55,48 @@ const navIconStyle = {
 
 // Portfolio App
 const DataSciencePortfolio = () => {
-  const [activePage, setActivePage] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
+  const [isMobile, setIsMobile] = useState(false);
   
-  // Navigation links
+  // Check screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  // Navigation links - reordered with About first
   const navLinks = [
-    { id: 'home', label: 'Home', icon: <Home style={{...navIconStyle, color: colors.textLight}} /> },
     { id: 'about', label: 'About', icon: <User style={{...navIconStyle, color: colors.textLight}} /> },
+    { id: 'projects', label: 'Projects', icon: <Briefcase style={{...navIconStyle, color: colors.textLight}} /> },
     { id: 'contact', label: 'Contact', icon: <Mail style={{...navIconStyle, color: colors.textLight}} /> }
   ];
 
@@ -58,9 +105,16 @@ const DataSciencePortfolio = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // Handle navigation
-  const navigate = (pageId) => {
-    setActivePage(pageId);
+  // Handle navigation with smooth scroll
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offsetTop = element.offsetTop - 73; // Header height
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
     setMobileMenuOpen(false);
   };
 
@@ -91,11 +145,18 @@ const DataSciencePortfolio = () => {
           alignItems: 'center'
         }}>
           {/* Logo */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px'
-          }}>
+          <button
+            onClick={() => scrollToSection('about')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0
+            }}
+          >
             <div style={{
               background: colors.primary,
               borderRadius: '8px',
@@ -109,84 +170,81 @@ const DataSciencePortfolio = () => {
             </div>
             <h1 style={{
               margin: 0,
-              fontSize: '22px',
+              fontSize: isMobile ? '16px' : '22px',
               fontWeight: 'bold',
               color: colors.text
             }}>Nicholas Salazar&apos;s DataSci Portfolio</h1>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
-          <nav style={{
-            display: 'none',
-            '@media (minWidth: 768px)': {
-              display: 'flex'
-            }
-          }}>
-            <ul style={{
-              display: 'flex',
-              gap: '32px',
-              listStyle: 'none',
-              margin: 0,
-              padding: 0
-            }}>
-              {navLinks.map(link => (
-                <li key={link.id}>
-                  <button
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      fontSize: '16px',
-                      fontWeight: activePage === link.id ? 'bold' : 'normal',
-                      color: activePage === link.id ? colors.primary : colors.textLight,
-                      padding: '8px 0',
-                      borderBottom: activePage === link.id ? `2px solid ${colors.primary}` : '2px solid transparent',
-                      transition: 'all 0.3s ease',
-                    }}
-                    onClick={() => navigate(link.id)}
-                  >
-                    {link.icon} {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {!isMobile && (
+            <nav>
+              <ul style={{
+                display: 'flex',
+                gap: '32px',
+                listStyle: 'none',
+                margin: 0,
+                padding: 0
+              }}>
+                {navLinks.map(link => (
+                  <li key={link.id}>
+                    <button
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '16px',
+                        fontWeight: activeSection === link.id ? 'bold' : 'normal',
+                        color: activeSection === link.id ? colors.primary : colors.textLight,
+                        padding: '8px 0',
+                        borderBottom: activeSection === link.id ? `2px solid ${colors.primary}` : '2px solid transparent',
+                        transition: 'all 0.3s ease',
+                      }}
+                      onClick={() => scrollToSection(link.id)}
+                    >
+                      {link.icon} {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
 
           {/* Mobile Menu Button */}
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              '@media (minWidth: 768px)': {
-                display: 'none'
+          {isMobile && (
+            <button
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 0
+              }}
+              onClick={toggleMobileMenu}
+            >
+              {mobileMenuOpen ? 
+                <X size={24} color={colors.text} /> : 
+                <Menu size={24} color={colors.text} />
               }
-            }}
-            onClick={toggleMobileMenu}
-          >
-            {mobileMenuOpen ? 
-              <X size={24} color={colors.text} /> : 
-              <Menu size={24} color={colors.text} />
-            }
-          </button>
+            </button>
+          )}
         </div>
       </header>
 
       {/* Mobile Navigation Menu */}
-      {mobileMenuOpen && (
+      {isMobile && mobileMenuOpen && (
         <div style={{
           position: 'fixed',
-          top: '73px', // Height of header
+          top: '73px',
           left: 0,
           right: 0,
           background: 'white',
-          zIndex: 5,
+          zIndex: 9,
           boxShadow: '0 4px 8px rgba(125, 157, 127, 0.1)',
           borderBottom: `1px solid ${colors.border}`
         }}>
@@ -202,17 +260,17 @@ const DataSciencePortfolio = () => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '12px',
-                    background: activePage === link.id ? colors.accent : 'none',
+                    background: activeSection === link.id ? colors.accent : 'white',
                     border: 'none',
                     cursor: 'pointer',
                     padding: '16px 24px',
                     width: '100%',
                     textAlign: 'left',
                     fontSize: '16px',
-                    fontWeight: activePage === link.id ? 'bold' : 'normal',
-                    color: activePage === link.id ? colors.primary : colors.textLight
+                    fontWeight: activeSection === link.id ? 'bold' : 'normal',
+                    color: activeSection === link.id ? colors.primary : colors.textLight
                   }}
-                  onClick={() => navigate(link.id)}
+                  onClick={() => scrollToSection(link.id)}
                 >
                   {link.icon} {link.label}
                 </button>
@@ -225,19 +283,43 @@ const DataSciencePortfolio = () => {
       {/* Main Content */}
       <main style={{
         flex: 1,
-        padding: '24px',
-        maxWidth: '1200px',
-        margin: '0 auto',
         width: '100%'
       }}>
-        {/* Home Page */}
-        {activePage === 'home' && <HomePage />}
-        
-        {/* About Page */}
-        {activePage === 'about' && <AboutPage />}
-        
-        {/* Contact Page */}
-        {activePage === 'contact' && <ContactPage />}
+        {/* About Section - Moved to top */}
+        <section id="about" style={{
+          padding: '64px 24px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          width: '100%',
+          minHeight: '60vh',
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          <AboutSection />
+        </section>
+
+        {/* Projects Section */}
+        <section id="projects" style={{
+          padding: '48px 24px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          width: '100%',
+          minHeight: '100vh',
+          background: 'white'
+        }}>
+          <ProjectsSection />
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" style={{
+          padding: '48px 24px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          width: '100%',
+          minHeight: '100vh'
+        }}>
+          <ContactSection />
+        </section>
       </main>
 
       {/* Footer */}
@@ -256,7 +338,7 @@ const DataSciencePortfolio = () => {
             fontSize: '14px',
             margin: 0
           }}>
-            © 2023 DataSci Portfolio. Built with React and ❤️
+            © 2024 Nicholas Salazar. Built with Next.js and ❤️
           </p>
         </div>
       </footer>
@@ -264,90 +346,127 @@ const DataSciencePortfolio = () => {
   );
 };
 
-// Home Page Component (Projects Page)
-const HomePage = () => {
+// Simplified About Section Component
+const AboutSection = () => {
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: isMobile ? 'column' : 'row',
+      alignItems: 'center',
+      gap: '48px',
+      width: '100%'
+    }}>
+      {/* Profile Image */}
+      <div style={{
+        flex: '0 0 280px',
+        maxWidth: '280px',
+        width: '100%'
+      }}>
+        <div style={{
+          background: colors.primary,
+          borderRadius: '12px',
+          width: '100%',
+          aspectRatio: '1',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 4px 12px rgba(125, 157, 127, 0.2)'
+        }}>
+          <User size={120} color="white" style={{ opacity: 0.9 }} />
+        </div>
+      </div>
+
+      {/* About Text */}
+      <div style={{ flex: 1 }}>
+        <h2 style={{ 
+          fontSize: '36px', 
+          fontWeight: 'bold', 
+          marginBottom: '24px',
+          color: colors.text 
+        }}>
+          Hi, I&apos;m Nicholas Salazar
+        </h2>
+        <p style={{ 
+          color: colors.textLight,
+          fontSize: '18px',
+          marginBottom: '20px',
+          lineHeight: '1.8'
+        }}>
+          I&apos;m a data scientist and web developer passionate about creating interactive data experiences. I specialize in building applications that make complex data accessible and actionable.
+        </p>
+        <p style={{ 
+          color: colors.textLight,
+          fontSize: '18px',
+          lineHeight: '1.8',
+          marginBottom: '24px'
+        }}>
+          With a background in both computer science and statistics, I bridge the gap between robust analysis and user-friendly interfaces. I&apos;m particularly interested in visualization techniques that reveal patterns and insights in large datasets.
+        </p>
+        <div style={{
+          display: 'flex',
+          gap: '16px',
+          flexWrap: 'wrap'
+        }}>
+          <button
+            onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
+            style={{
+              padding: '12px 24px',
+              background: colors.primary,
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = colors.primaryDark;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = colors.primary;
+            }}
+          >
+            View My Work
+          </button>
+          <button
+            onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+            style={{
+              padding: '12px 24px',
+              background: 'white',
+              color: colors.primary,
+              border: `2px solid ${colors.primary}`,
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = colors.accent;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'white';
+            }}
+          >
+            Get In Touch
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Projects Section Component
+const ProjectsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   
-  const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'visualization', name: 'Data Visualization' },
-    { id: 'dashboard', name: 'Dashboards' },
-    { id: 'ml', name: 'Machine Learning' },
-    { id: 'analytics', name: 'Analytics Tools' }
-  ];
-  
-  const projects = [
-    {
-      id: 1,
-      title: 'Real-time Financial Dashboard',
-      description: 'Create a dashboard that displays stock market data in real-time with multiple visualization types.',
-      category: 'dashboard',
-      difficulty: 'Medium',
-      icon: <LineChart style={{ ...iconStyle, color: colors.primary }} />,
-      libraries: ['Recharts', 'React Query', 'Financial APIs (Alpha Vantage, Polygon)'],
-      features: ['Multiple chart types', 'Real-time data updates', 'Historical comparisons', 'Custom indicators']
-    },
-    {
-      id: 2,
-      title: 'Interactive Data Explorer',
-      description: 'Build a tool that allows users to upload CSV/Excel files and interactively explore the data with dynamically generated visualizations.',
-      category: 'visualization',
-      difficulty: 'Medium',
-      icon: <Layers style={{ ...iconStyle, color: colors.primaryDark }} />,
-      libraries: ['Papaparse', 'SheetJS', 'D3.js/Recharts', 'React Dropzone'],
-      features: ['File upload & parsing', 'Data summary statistics', 'Custom chart generation', 'Data filtering & sorting']
-    },
-    {
-      id: 3,
-      title: 'ML Model Playground',
-      description: 'Develop an interface for users to interact with pre-trained machine learning models and see predictions in real-time.',
-      category: 'ml',
-      difficulty: 'Hard',
-      icon: <BrainCircuit style={{ ...iconStyle, color: colors.primary }} />,
-      libraries: ['TensorFlow.js', 'Plotly', 'React Hook Form'],
-      features: ['Input parameter controls', 'Visualized predictions', 'Multiple model support', 'Result explanations']
-    },
-    {
-      id: 4,
-      title: 'Business KPI Tracker',
-      description: 'Create a comprehensive dashboard for tracking business KPIs with drill-down capabilities and alerts.',
-      category: 'dashboard',
-      difficulty: 'Medium',
-      icon: <TrendingUp style={{ ...iconStyle, color: colors.primaryDark }} />,
-      libraries: ['Recharts/D3.js', 'React Table', 'Context API'],
-      features: ['Custom KPI cards', 'Goal tracking', 'Historical trends', 'Data export']
-    },
-    {
-      id: 5,
-      title: 'Geospatial Data Visualizer',
-      description: 'Build an interactive map-based visualization tool for exploring geographic data patterns.',
-      category: 'visualization',
-      difficulty: 'Medium',
-      icon: <AreaChart style={{ ...iconStyle, color: colors.primary }} />,
-      libraries: ['React Leaflet/MapboxGL', 'D3-geo', 'GeoJSON utilities'],
-      features: ['Interactive maps', 'Data overlays', 'Clustering', 'Custom region selection']
-    },
-    {
-      id: 6,
-      title: 'A/B Test Results Analyzer',
-      description: 'Develop a tool for uploading, analyzing, and visualizing A/B test results with statistical significance calculations.',
-      category: 'analytics',
-      difficulty: 'Medium',
-      icon: <BarChart3 style={{ ...iconStyle, color: colors.primaryDark }} />,
-      libraries: ['Recharts', 'Math.js', 'React Table'],
-      features: ['Statistical tests', 'Confidence intervals', 'Visual comparisons', 'Sample size calculator']
-    }
-  ];
+  const projects = projectsData.projects;
+  const categories = projectsData.categories;
   
   const filteredProjects = selectedCategory === 'all' 
     ? projects 
     : projects.filter(project => project.category === selectedCategory);
-  
-  const difficultyStyles = {
-    Easy: { background: '#D0E0D1', color: '#2D3B2D' },
-    Medium: { background: '#B0C4B1', color: '#2D3B2D' },
-    Hard: { background: '#7D9D7F', color: '#F7F9F7' }
-  };
   
   return (
     <div>
@@ -364,7 +483,7 @@ const HomePage = () => {
         <p style={{ 
           color: colors.textLight,
           fontSize: '16px',
-          maxWidth: '700px'
+          maxWidth: '800px'
         }}>
           Explore these project ideas to build your portfolio and practice your React and data science skills. Each project is designed to showcase different aspects of data analysis and visualization.
         </p>
@@ -384,7 +503,7 @@ const HomePage = () => {
               padding: '8px 16px',
               borderRadius: '9999px',
               transition: 'all 0.3s ease',
-              background: selectedCategory === category.id ? colors.primary : 'white',
+              background: selectedCategory === category.id ? colors.primary : colors.background,
               color: selectedCategory === category.id ? 'white' : colors.textLight,
               border: `1px solid ${colors.border}`,
               cursor: 'pointer',
@@ -402,350 +521,148 @@ const HomePage = () => {
       {/* Projects Grid */}
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(1, 1fr)',
-        gap: '24px',
-        '@media (minWidth: 640px)': {
-          gridTemplateColumns: 'repeat(2, 1fr)'
-        },
-        '@media (minWidth: 1024px)': {
-          gridTemplateColumns: 'repeat(3, 1fr)'
-        }
+        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+        gap: '24px'
       }}>
-        {filteredProjects.map(project => (
-          <div 
-            key={project.id} 
-            style={{
-              background: 'white',
-              borderRadius: '12px',
-              overflow: 'hidden',
-              boxShadow: '0 2px 8px rgba(125, 157, 127, 0.15)',
-              transition: 'all 0.3s ease',
-              border: `1px solid ${colors.border}`,
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-          >
-            <div style={{ padding: '24px' }}>
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'space-between', 
-                marginBottom: '16px'
-              }}>
-                <div style={{ 
-                  padding: '12px', 
-                  borderRadius: '9999px', 
-                  background: colors.accent,
+        {filteredProjects.map(project => {
+          const IconComponent = iconMap[project.icon];
+          return (
+            <Link 
+              key={project.id}
+              href={`/projects/${project.slug}`}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <div 
+                style={{
+                  background: colors.background,
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 8px rgba(125, 157, 127, 0.15)',
+                  transition: 'all 0.3s ease',
+                  border: `1px solid ${colors.border}`,
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  {project.icon}
-                </div>
-                <span style={{ 
-                  fontSize: '12px',
-                  fontWeight: '500',
-                  padding: '4px 10px',
-                  borderRadius: '9999px',
-                  ...difficultyStyles[project.difficulty]
-                }}>
-                  {project.difficulty}
-                </span>
-              </div>
-              <h3 style={{ 
-                fontSize: '20px', 
-                fontWeight: 'bold', 
-                marginBottom: '8px', 
-                color: colors.text 
-              }}>
-                {project.title}
-              </h3>
-              <p style={{ 
-                marginBottom: '16px', 
-                color: colors.textLight,
-                fontSize: '14px',
-                lineHeight: '1.6'
-              }}>
-                {project.description}
-              </p>
-              
-              <div style={{ marginBottom: '16px' }}>
-                <h4 style={{ 
-                  fontSize: '14px', 
-                  fontWeight: '600', 
-                  marginBottom: '8px', 
-                  color: colors.text 
-                }}>
-                  Key Features:
-                </h4>
-                <ul style={{ 
-                  fontSize: '14px',
-                  marginLeft: '0',
-                  paddingLeft: '0',
-                  listStyle: 'none'
-                }}>
-                  {project.features.map((feature, index) => (
-                    <li key={index} style={{ 
-                      display: 'flex', 
-                      alignItems: 'center',
-                      marginBottom: '4px' 
-                    }}>
-                      <span style={{ 
-                        marginRight: '8px', 
-                        color: colors.primary 
-                      }}>•</span>
-                      <span style={{ color: colors.textLight }}>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div>
-                <h4 style={{ 
-                  fontSize: '14px', 
-                  fontWeight: '600', 
-                  marginBottom: '8px', 
-                  color: colors.text 
-                }}>
-                  Suggested Libraries:
-                </h4>
-                <div style={{ 
-                  display: 'flex', 
-                  flexWrap: 'wrap', 
-                  gap: '8px' 
-                }}>
-                  {project.libraries.map((library, index) => (
-                    <span 
-                      key={index} 
-                      style={{
-                        fontSize: '12px',
-                        padding: '4px 8px',
-                        borderRadius: '4px',
-                        background: colors.accent,
-                        color: colors.text
-                      }}
-                    >
-                      {library}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// About Page Component
-const AboutPage = () => {
-  const skills = [
-    { category: 'Programming', items: ['Python', 'JavaScript', 'R', 'SQL', 'Java'] },
-    { category: 'Data Science', items: ['Machine Learning', 'Statistical Analysis', 'Data Visualization', 'NLP', 'Big Data'] },
-    { category: 'Web Development', items: ['React', 'Node.js', 'HTML/CSS'] },
-    { category: 'Tools', items: ['Jupyter', 'Git', 'Tableau', 'PowerBI'] }
-  ];
-
-  const education = [
-    {
-      degree: 'M.S. in Computer Science',
-      institution: 'University of Florida',
-      year: '2021-2024',
-      description: 'Focused on machine learning algorithms, statistical modeling, and data visualization techniques.'
-    },
-    {
-      degree: 'B.S. in Computer Science',
-      institution: 'University of Florida',
-      year: '2018-2021',
-      description: 'Specialized in software engineering and database systems with a minor in Linguistics.'
-    }
-  ];
-
-  return (
-    <div>
-      {/* About Header */}
-      <div style={{ marginBottom: '32px' }}>
-        <h2 style={{ 
-          fontSize: '28px', 
-          fontWeight: 'bold', 
-          marginBottom: '8px',
-          color: colors.text 
-        }}>
-          About Me
-        </h2>
-        <p style={{ 
-          color: colors.textLight,
-          fontSize: '16px',
-          maxWidth: '700px',
-          marginBottom: '16px'
-        }}>
-          I&apos;m a data scientist and web developer passionate about creating interactive data experiences. I specialize in building applications that make complex data accessible and actionable.
-        </p>
-        <p style={{ 
-          color: colors.textLight,
-          fontSize: '16px',
-          maxWidth: '700px'
-        }}>
-          With a background in both computer science and statistics, I bridge the gap between robust analysis and user-friendly interfaces. I&apos;m particularly interested in visualization techniques that reveal patterns and insights in large datasets.
-        </p>
-      </div>
-
-      {/* Profile Section */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-        marginBottom: '32px',
-        '@media (minWidth: 768px)': {
-          flexDirection: 'row'
-        }
-      }}>
-        {/* Profile Image */}
-        <div style={{
-          flex: '0 0 280px',
-          '@media (minWidth: 768px)': {
-            flex: '0 0 320px'
-          }
-        }}>
-          <div style={{
-            background: colors.primary,
-            borderRadius: '8px',
-            width: '100%',
-            aspectRatio: '1',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <User size={120} color="white" style={{ opacity: 0.9 }} />
-          </div>
-        </div>
-
-        {/* Skills */}
-        <div style={{ flex: 1 }}>
-          <h3 style={{ 
-            fontSize: '20px', 
-            fontWeight: 'bold', 
-            marginBottom: '16px', 
-            color: colors.text 
-          }}>
-            Skills & Expertise
-          </h3>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(1, 1fr)',
-            gap: '24px',
-            '@media (minWidth: 640px)': {
-              gridTemplateColumns: 'repeat(2, 1fr)'
-            }
-          }}>
-            {skills.map((skillGroup, index) => (
-              <div key={index} style={{
-                background: 'white',
-                borderRadius: '8px',
-                padding: '16px',
-                border: `1px solid ${colors.border}`,
-                boxShadow: '0 2px 4px rgba(125, 157, 127, 0.1)'
-              }}>
-                <h4 style={{
-                  fontSize: '16px',
-                  fontWeight: 'bold',
-                  marginBottom: '8px',
-                  color: colors.text
-                }}>
-                  {skillGroup.category}
-                </h4>
-                <div style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '6px'
-                }}>
-                  {skillGroup.items.map((skill, i) => (
-                    <span key={i} style={{
-                      fontSize: '12px',
-                      padding: '4px 8px',
-                      borderRadius: '4px',
+                  flexDirection: 'column',
+                  height: '100%',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(125, 157, 127, 0.25)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(125, 157, 127, 0.15)';
+                }}
+              >
+                <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    marginBottom: '16px'
+                  }}>
+                    <div style={{ 
+                      padding: '12px', 
+                      borderRadius: '9999px', 
                       background: colors.accent,
-                      color: colors.text
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}>
-                      {skill}
-                    </span>
-                  ))}
+                      {IconComponent && <IconComponent style={{ ...iconStyle, color: project.iconColor }} />}
+                    </div>
+                  </div>
+                  <h3 style={{ 
+                    fontSize: '20px', 
+                    fontWeight: 'bold', 
+                    marginBottom: '8px', 
+                    color: colors.text 
+                  }}>
+                    {project.title}
+                  </h3>
+                  <p style={{ 
+                    marginBottom: '16px', 
+                    color: colors.textLight,
+                    fontSize: '14px',
+                    lineHeight: '1.6',
+                    flex: 1
+                  }}>
+                    {project.description}
+                  </p>
+                  
+                  <div style={{ marginBottom: '16px' }}>
+                    <h4 style={{ 
+                      fontSize: '14px', 
+                      fontWeight: '600', 
+                      marginBottom: '8px', 
+                      color: colors.text 
+                    }}>
+                      Key Features:
+                    </h4>
+                    <ul style={{ 
+                      fontSize: '14px',
+                      marginLeft: '0',
+                      paddingLeft: '0',
+                      listStyle: 'none'
+                    }}>
+                      {project.features.map((feature, index) => (
+                        <li key={index} style={{ 
+                          display: 'flex', 
+                          alignItems: 'center',
+                          marginBottom: '4px' 
+                        }}>
+                          <span style={{ 
+                            marginRight: '8px', 
+                            color: colors.primary 
+                          }}>•</span>
+                          <span style={{ color: colors.textLight }}>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h4 style={{ 
+                      fontSize: '14px', 
+                      fontWeight: '600', 
+                      marginBottom: '8px', 
+                      color: colors.text 
+                    }}>
+                      Featured Technologies:
+                    </h4>
+                    <div style={{ 
+                      display: 'flex', 
+                      flexWrap: 'wrap', 
+                      gap: '6px' 
+                    }}>
+                      {project.libraries.map((library, index) => (
+                        <span 
+                          key={index} 
+                          style={{
+                            fontSize: '12px',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            background: 'white',
+                            color: colors.text,
+                            border: `1px solid ${colors.border}`
+                          }}
+                        >
+                          {library}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Education */}
-      <div style={{ marginBottom: '32px' }}>
-        <h3 style={{ 
-          fontSize: '20px', 
-          fontWeight: 'bold', 
-          marginBottom: '16px', 
-          color: colors.text 
-        }}>
-          Education
-        </h3>
-
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px'
-        }}>
-          {education.map((item, index) => (
-            <div key={index} style={{
-              background: 'white',
-              borderRadius: '8px',
-              padding: '20px',
-              border: `1px solid ${colors.border}`,
-              boxShadow: '0 2px 4px rgba(125, 157, 127, 0.1)'
-            }}>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: '8px'
-              }}>
-                <h4 style={{
-                  fontSize: '18px',
-                  fontWeight: 'bold',
-                  color: colors.text
-                }}>
-                  {item.degree}
-                </h4>
-                <span style={{
-                  fontSize: '14px',
-                  color: colors.primary,
-                  fontWeight: '500'
-                }}>
-                  {item.year}
-                </span>
-              </div>
-              <p style={{
-                fontSize: '14px',
-                color: colors.textLight,
-                marginBottom: '8px'
-              }}>
-                {item.institution}
-              </p>
-              <p style={{
-                fontSize: '14px',
-                color: colors.textLight
-              }}>
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
 };
 
-// Contact Page Component
-const ContactPage = () => {
+// Contact Section Component
+const ContactSection = () => {
   return (
     <div>
       {/* Contact Header */}
@@ -770,11 +687,8 @@ const ContactPage = () => {
       {/* Contact Sections */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(1, 1fr)',
-        gap: '32px',
-        '@media (minWidth: 768px)': {
-          gridTemplateColumns: 'repeat(2, 1fr)'
-        }
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '32px'
       }}>
         {/* Contact Form */}
         <div style={{
@@ -822,7 +736,8 @@ const ContactPage = () => {
                   border: `1px solid ${colors.border}`,
                   fontSize: '16px',
                   color: colors.text,
-                  background: colors.background
+                  background: colors.background,
+                  boxSizing: 'border-box'
                 }}
                 placeholder="Your name"
                 required
@@ -849,7 +764,8 @@ const ContactPage = () => {
                   border: `1px solid ${colors.border}`,
                   fontSize: '16px',
                   color: colors.text,
-                  background: colors.background
+                  background: colors.background,
+                  boxSizing: 'border-box'
                 }}
                 placeholder="your.email@example.com"
                 required
@@ -877,7 +793,9 @@ const ContactPage = () => {
                   color: colors.text,
                   minHeight: '120px',
                   resize: 'vertical',
-                  background: colors.background
+                  background: colors.background,
+                  boxSizing: 'border-box',
+                  fontFamily: 'inherit'
                 }}
                 placeholder="How can I help you?"
                 required
@@ -895,10 +813,13 @@ const ContactPage = () => {
                 fontSize: '16px',
                 fontWeight: '500',
                 cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                ':hover': {
-                  background: colors.primaryDark
-                }
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = colors.primaryDark;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = colors.primary;
               }}
             >
               Send Message
@@ -947,7 +868,8 @@ const ContactPage = () => {
                   </h4>
                   <p style={{
                     fontSize: '14px',
-                    color: colors.textLight
+                    color: colors.textLight,
+                    margin: 0
                   }}>
                     contact@datasciportfolio.com
                   </p>
@@ -971,7 +893,9 @@ const ContactPage = () => {
                   </h4>
                   <p style={{
                     fontSize: '14px',
-                    color: colors.textLight
+                    color: colors.textLight,
+                    margin: 0,
+                    lineHeight: '1.6'
                   }}>
                     LinkedIn: /in/datasci-portfolio<br />
                     GitHub: @datasci-portfolio<br />
@@ -1035,5 +959,11 @@ const ContactPage = () => {
     </div>
   );
 };
+
+// Add isMobile to the global scope for use in components
+let isMobile = false;
+if (typeof window !== 'undefined') {
+  isMobile = window.innerWidth < 768;
+}
 
 export default DataSciencePortfolio;
