@@ -5,9 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  // Add this if your GitHub Pages URL is username.github.io/repository-name
-  // basePath: '/your-repository-name',
-  // assetPrefix: '/your-repository-name/',
+  basePath: '/nicksal21.github.io',
+  assetPrefix: '/nicksal21.github.io/',
   };
 
 export default nextConfig;
