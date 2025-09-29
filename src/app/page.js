@@ -112,7 +112,7 @@ const DataSciencePortfolio = () => {
               fontSize: '22px',
               fontWeight: 'bold',
               color: colors.text
-            }}>Nicholas Salazarz&apos;s DataSci Portfolio</h1>
+            }}>Nicholas Salazar&apos;s DataSci Portfolio</h1>
           </div>
 
           {/* Desktop Navigation */}
