@@ -1,43 +1,20 @@
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Tag, ExternalLink, Github } from 'lucide-react';
 import projectsData from '@/data/projects.json';
-
-const colors = {
-  primary: '#7D9D7F',
-  primaryDark: '#5A7A5C',
-  primaryLight: '#B0C4B1',
-  background: '#F7F9F7',
-  text: '#2D3B2D',
-  textLight: '#4A5D4A',
-  accent: '#D0E0D1',
-  border: '#C8D5C8',
-};
+import TableauEmbed from '@/app/components/TableauEmbed.js';
+import PowerBIEmbed from '@/app/components/PowerBIEmbed';
 
 export default function ProjectPage({ params }) {
   const project = projectsData.projects.find(p => p.slug === params.slug);
 
   if (!project) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: colors.background
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: '24px', marginBottom: '16px', color: colors.text }}>
+      <div className="project-not-found">
+        <div className="project-not-found-content">
+          <h1 className="project-not-found-title">
             Project Not Found
           </h1>
-          <Link href="/" style={{
-            color: colors.primary,
-            textDecoration: 'none',
-            fontSize: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            justifyContent: 'center'
-          }}>
+          <Link href="/" className="project-not-found-link">
             <ArrowLeft size={20} /> Back to Home
           </Link>
         </div>
@@ -45,131 +22,57 @@ export default function ProjectPage({ params }) {
     );
   }
 
+  // Check if this is a Tableau project
+  const isTableauProject = project.tableauUrl || project.tags?.includes("Tableau");
+
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: colors.background,
-      paddingBottom: '48px'
-    }}>
+    <div className="project-detail-container">
       {/* Header */}
-      <header style={{
-        background: 'white',
-        padding: '16px 24px',
-        boxShadow: '0 2px 8px rgba(125, 157, 127, 0.1)',
-        borderBottom: `1px solid ${colors.border}`,
-        marginBottom: '32px'
-      }}>
-        <div style={{
-          maxWidth: '900px',
-          margin: '0 auto'
-        }}>
-          <Link href="/#projects" style={{
-            color: colors.primary,
-            textDecoration: 'none',
-            fontSize: '16px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontWeight: '500',
-            transition: 'color 0.3s ease'
-          }}>
+      <header className="project-detail-header">
+        <div className="project-detail-header-content">
+          <Link href="/#projects" className="project-detail-back-link">
             <ArrowLeft size={20} /> Back to Portfolio
           </Link>
         </div>
       </header>
 
       {/* Main Content */}
-      <article style={{
-        maxWidth: '900px',
-        margin: '0 auto',
-        padding: '0 24px'
-      }}>
+      <article className="project-detail-article">
         {/* Title Section */}
-        <div style={{ marginBottom: '32px' }}>
-          <h1 style={{
-            fontSize: '36px',
-            fontWeight: 'bold',
-            color: colors.text,
-            marginBottom: '16px',
-            lineHeight: '1.2'
-          }}>
+        <div className="project-detail-title-section">
+          <h1 className="project-detail-title">
             {project.title}
           </h1>
 
           {/* Meta Information */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '16px',
-            alignItems: 'center',
-            marginBottom: '16px'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: colors.textLight,
-              fontSize: '14px'
-            }}>
+          <div className="project-detail-meta">
+            <div className="project-detail-meta-item">
               <Calendar size={16} />
               {project.date}
             </div>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: colors.textLight,
-              fontSize: '14px'
-            }}>
+            <div className="project-detail-meta-item">
               <Tag size={16} />
               {projectsData.categories.find(c => c.id === project.category)?.name || project.category}
             </div>
           </div>
 
           {/* Tags */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '8px',
-            marginBottom: '24px'
-          }}>
+          <div className="project-detail-tags">
             {project.tags.map((tag, index) => (
-              <span key={index} style={{
-                padding: '4px 12px',
-                background: colors.accent,
-                color: colors.text,
-                borderRadius: '16px',
-                fontSize: '14px'
-              }}>
+              <span key={index} className="project-detail-tag">
                 {tag}
               </span>
             ))}
           </div>
 
           {/* Links */}
-          <div style={{
-            display: 'flex',
-            gap: '12px',
-            flexWrap: 'wrap'
-          }}>
-            {project.liveUrl && project.liveUrl !== '#' && (
+          <div className="project-detail-links">
+            {project.liveUrl && project.liveUrl !== '#' && !project.tableauUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '10px 20px',
-                  background: colors.primary,
-                  color: 'white',
-                  textDecoration: 'none',
-                  borderRadius: '6px',
-                  fontSize: '14px',
-                  fontWeight: '500',
-                  transition: 'background 0.3s ease'
-                }}
+                className="project-detail-link-primary"
               >
                 <ExternalLink size={16} /> View Live Demo
               </a>
@@ -179,20 +82,7 @@ export default function ProjectPage({ params }) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '10px 20px',
-                  background: 'white',
-                  color: colors.primary,
-                  textDecoration: 'none',
-                  borderRadius: '6px',
-                  fontSize: '14px',
-                  fontWeight: '500',
-                  border: `1px solid ${colors.border}`,
-                  transition: 'all 0.3s ease'
-                }}
+                className="project-detail-link-secondary"
               >
                 <Github size={16} /> View Code
               </a>
@@ -200,131 +90,107 @@ export default function ProjectPage({ params }) {
           </div>
         </div>
 
+        
+            {project.embedType && project.embedUrl && (
+              <section className="project-detail-section">
+                <h2 className="project-detail-section-title">
+                  Interactive Dashboard
+                </h2>
+                <div className="embed-container">
+                  {project.embedType === 'tableau' && (
+                    <TableauEmbed
+                      url={project.embedUrl}
+                      {...(project.embedConfig || {})}
+                    />
+                  )}
+                  {project.embedType === 'powerbi' && (
+                    <PowerBIEmbed
+                      url={project.embedUrl}
+                      {...(project.embedConfig || {})}
+                    />
+                  )}
+                  {/* Add more embed types as needed */}
+                </div>
+              </section>
+            )}
+
         {/* Project Content */}
-        <div style={{
-          background: 'white',
-          borderRadius: '12px',
-          padding: '32px',
-          boxShadow: '0 2px 8px rgba(125, 157, 127, 0.1)',
-          border: `1px solid ${colors.border}`
-        }}>
+        <div className="project-detail-content">
           {/* Summary */}
-          <section style={{ marginBottom: '32px' }}>
-            <h2 style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: colors.text,
-              marginBottom: '12px'
-            }}>
+          <section className="project-detail-section">
+            <h2 className="project-detail-section-title">
               Overview
             </h2>
-            <p style={{
-              fontSize: '16px',
-              lineHeight: '1.7',
-              color: colors.textLight
-            }}>
+            <p className="project-detail-section-text">
               {project.summary}
             </p>
           </section>
 
+          {/* Tableau Embed - Show early if it's a Tableau project */}
+          {isTableauProject && project.tableauUrl && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">
+                Interactive Dashboard
+              </h2>
+              <div className="tableau-embed-container">
+                <TableauEmbed
+                  url={project.tableauUrl}
+                  height="800px"
+                  width="100%"
+                />
+              </div>
+            </section>
+          )}
+
           {/* Challenge */}
-          <section style={{ marginBottom: '32px' }}>
-            <h2 style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: colors.text,
-              marginBottom: '12px'
-            }}>
-              The Challenge
-            </h2>
-            <p style={{
-              fontSize: '16px',
-              lineHeight: '1.7',
-              color: colors.textLight
-            }}>
-              {project.challenge}
-            </p>
-          </section>
+          {project.challenge && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">
+                The Challenge
+              </h2>
+              <p className="project-detail-section-text">
+                {project.challenge}
+              </p>
+            </section>
+          )}
 
           {/* Solution */}
-          <section style={{ marginBottom: '32px' }}>
-            <h2 style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: colors.text,
-              marginBottom: '12px'
-            }}>
-              The Solution
-            </h2>
-            <p style={{
-              fontSize: '16px',
-              lineHeight: '1.7',
-              color: colors.textLight
-            }}>
-              {project.solution}
-            </p>
-          </section>
+          {project.solution && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">
+                The Solution
+              </h2>
+              <p className="project-detail-section-text">
+                {project.solution}
+              </p>
+            </section>
+          )}
 
           {/* Results */}
-          <section style={{ marginBottom: '32px' }}>
-            <h2 style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: colors.text,
-              marginBottom: '12px'
-            }}>
-              Key Results
-            </h2>
-            <ul style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: 0
-            }}>
-              {project.results.map((result, index) => (
-                <li key={index} style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '12px',
-                  marginBottom: '12px',
-                  fontSize: '16px',
-                  lineHeight: '1.7',
-                  color: colors.textLight
-                }}>
-                  <span style={{
-                    color: colors.primary,
-                    fontWeight: 'bold',
-                    fontSize: '20px'
-                  }}>✓</span>
-                  {result}
-                </li>
-              ))}
-            </ul>
-          </section>
+          {project.results && project.results.length > 0 && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">
+                Key Results
+              </h2>
+              <ul className="project-detail-results-list">
+                {project.results.map((result, index) => (
+                  <li key={index} className="project-detail-result-item">
+                    <span className="project-detail-result-icon">✓</span>
+                    {result}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           {/* Technologies */}
-          <section>
-            <h2 style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: colors.text,
-              marginBottom: '12px'
-            }}>
+          <section className="project-detail-section">
+            <h2 className="project-detail-section-title">
               Technologies Used
             </h2>
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '8px'
-            }}>
+            <div className="project-detail-technologies">
               {project.technologies.map((tech, index) => (
-                <span key={index} style={{
-                  padding: '6px 14px',
-                  background: colors.accent,
-                  color: colors.text,
-                  borderRadius: '6px',
-                  fontSize: '14px',
-                  fontWeight: '500'
-                }}>
+                <span key={index} className="project-detail-tech-tag">
                   {tech}
                 </span>
               ))}

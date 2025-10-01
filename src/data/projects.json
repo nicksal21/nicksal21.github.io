@@ -8,10 +8,24 @@
       "category": "dashboard",
       "icon": "LineChart",
       "iconColor": "#7D9D7F",
-      "libraries": ["Recharts", "React Query", "Financial APIs (Alpha Vantage, Polygon)"],
-      "features": ["Multiple chart types", "Real-time data updates", "Historical comparisons", "Custom indicators"],
+      "libraries": [
+        "Recharts",
+        "React Query",
+        "Financial APIs (Alpha Vantage, Polygon)"
+      ],
+      "features": [
+        "Multiple chart types",
+        "Real-time data updates",
+        "Historical comparisons",
+        "Custom indicators"
+      ],
       "date": "March 2024",
-      "tags": ["React", "Recharts", "APIs", "Real-time Data"],
+      "tags": [
+        "React",
+        "Recharts",
+        "APIs",
+        "Real-time Data"
+      ],
       "summary": "A comprehensive real-time financial dashboard that displays stock market data with multiple visualization types, technical indicators, and historical comparisons.",
       "challenge": "Creating a dashboard that could handle real-time data updates without performance degradation while providing intuitive controls for users to customize their view.",
       "solution": "Implemented efficient state management with React Query for caching and automatic refetching, used websockets for real-time updates, and optimized chart rendering with Recharts.",
@@ -21,7 +35,14 @@
         "Custom technical indicators (RSI, MACD, Bollinger Bands)",
         "Historical data comparison across multiple timeframes"
       ],
-      "technologies": ["React", "TypeScript", "Recharts", "React Query", "WebSocket", "Alpha Vantage API"],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Recharts",
+        "React Query",
+        "WebSocket",
+        "Alpha Vantage API"
+      ],
       "liveUrl": "#",
       "githubUrl": "#"
     },
@@ -33,10 +54,25 @@
       "category": "visualization",
       "icon": "Layers",
       "iconColor": "#5A7A5C",
-      "libraries": ["Papaparse", "SheetJS", "D3.js/Recharts", "React Dropzone"],
-      "features": ["File upload & parsing", "Data summary statistics", "Custom chart generation", "Data filtering & sorting"],
+      "libraries": [
+        "Papaparse",
+        "SheetJS",
+        "D3.js/Recharts",
+        "React Dropzone"
+      ],
+      "features": [
+        "File upload & parsing",
+        "Data summary statistics",
+        "Custom chart generation",
+        "Data filtering & sorting"
+      ],
       "date": "February 2024",
-      "tags": ["React", "D3.js", "Data Processing", "File Upload"],
+      "tags": [
+        "React",
+        "D3.js",
+        "Data Processing",
+        "File Upload"
+      ],
       "summary": "An interactive tool that allows users to upload CSV/Excel files and explore their data through dynamically generated visualizations and summary statistics.",
       "challenge": "Handling various file formats and data structures while automatically suggesting appropriate visualizations based on data types.",
       "solution": "Built a robust data parser supporting multiple formats, implemented automatic data type detection, and created a recommendation engine for visualization types.",
@@ -46,7 +82,13 @@
         "Dynamic chart generation based on data structure",
         "Interactive filtering and data transformation tools"
       ],
-      "technologies": ["React", "D3.js", "Papaparse", "SheetJS", "React Dropzone"],
+      "technologies": [
+        "React",
+        "D3.js",
+        "Papaparse",
+        "SheetJS",
+        "React Dropzone"
+      ],
       "liveUrl": "#",
       "githubUrl": "#"
     },
@@ -58,10 +100,24 @@
       "category": "ml",
       "icon": "BrainCircuit",
       "iconColor": "#7D9D7F",
-      "libraries": ["TensorFlow.js", "Plotly", "React Hook Form"],
-      "features": ["Input parameter controls", "Visualized predictions", "Multiple model support", "Result explanations"],
+      "libraries": [
+        "TensorFlow.js",
+        "Plotly",
+        "React Hook Form"
+      ],
+      "features": [
+        "Input parameter controls",
+        "Visualized predictions",
+        "Multiple model support",
+        "Result explanations"
+      ],
       "date": "January 2024",
-      "tags": ["TensorFlow.js", "React", "ML", "Interactive"],
+      "tags": [
+        "TensorFlow.js",
+        "React",
+        "ML",
+        "Interactive"
+      ],
       "summary": "An interactive playground for experimenting with pre-trained machine learning models, allowing users to adjust parameters and see predictions in real-time.",
       "challenge": "Making complex ML models accessible to non-technical users while maintaining accuracy and performance in the browser.",
       "solution": "Leveraged TensorFlow.js for browser-based inference, created intuitive parameter controls, and implemented visual explanations for model predictions.",
@@ -71,7 +127,12 @@
         "Interactive parameter tuning with instant results",
         "Explainable AI features showing feature importance"
       ],
-      "technologies": ["React", "TensorFlow.js", "Plotly.js", "React Hook Form"],
+      "technologies": [
+        "React",
+        "TensorFlow.js",
+        "Plotly.js",
+        "React Hook Form"
+      ],
       "liveUrl": "#",
       "githubUrl": "#"
     },
@@ -83,10 +144,24 @@
       "category": "dashboard",
       "icon": "TrendingUp",
       "iconColor": "#5A7A5C",
-      "libraries": ["Recharts/D3.js", "React Table", "Context API"],
-      "features": ["Custom KPI cards", "Goal tracking", "Historical trends", "Data export"],
+      "libraries": [
+        "Recharts/D3.js",
+        "React Table",
+        "Context API"
+      ],
+      "features": [
+        "Custom KPI cards",
+        "Goal tracking",
+        "Historical trends",
+        "Data export"
+      ],
       "date": "December 2023",
-      "tags": ["React", "Analytics", "Business Intelligence", "Data Visualization"],
+      "tags": [
+        "React",
+        "Analytics",
+        "Business Intelligence",
+        "Data Visualization"
+      ],
       "summary": "A comprehensive business intelligence dashboard for tracking key performance indicators with drill-down capabilities, alerts, and customizable views.",
       "challenge": "Creating a flexible system that could accommodate different business needs while maintaining a clean, intuitive interface.",
       "solution": "Built a modular component system allowing for customizable KPI cards, implemented a flexible data model, and created an alerting system for threshold monitoring.",
@@ -97,7 +172,13 @@
         "Automated alerts for threshold violations",
         "Data export in multiple formats"
       ],
-      "technologies": ["React", "Recharts", "React Table", "Context API", "Local Storage"],
+      "technologies": [
+        "React",
+        "Recharts",
+        "React Table",
+        "Context API",
+        "Local Storage"
+      ],
       "liveUrl": "#",
       "githubUrl": "#"
     },
@@ -109,10 +190,24 @@
       "category": "visualization",
       "icon": "AreaChart",
       "iconColor": "#7D9D7F",
-      "libraries": ["React Leaflet/MapboxGL", "D3-geo", "GeoJSON utilities"],
-      "features": ["Interactive maps", "Data overlays", "Clustering", "Custom region selection"],
+      "libraries": [
+        "React Leaflet/MapboxGL",
+        "D3-geo",
+        "GeoJSON utilities"
+      ],
+      "features": [
+        "Interactive maps",
+        "Data overlays",
+        "Clustering",
+        "Custom region selection"
+      ],
       "date": "November 2023",
-      "tags": ["React", "Maps", "GeoJSON", "Interactive"],
+      "tags": [
+        "React",
+        "Maps",
+        "GeoJSON",
+        "Interactive"
+      ],
       "summary": "An interactive map-based visualization tool for exploring geographic data patterns with support for various data overlays and clustering algorithms.",
       "challenge": "Handling large geospatial datasets efficiently while providing smooth interactions and multiple overlay options.",
       "solution": "Implemented efficient clustering algorithms, used tile-based rendering for performance, and created a flexible layer system for data overlays.",
@@ -123,7 +218,13 @@
         "Heat maps and choropleth maps",
         "GeoJSON import/export functionality"
       ],
-      "technologies": ["React", "Leaflet", "D3-geo", "Turf.js", "GeoJSON"],
+      "technologies": [
+        "React",
+        "Leaflet",
+        "D3-geo",
+        "Turf.js",
+        "GeoJSON"
+      ],
       "liveUrl": "#",
       "githubUrl": "#"
     },
@@ -135,10 +236,24 @@
       "category": "analytics",
       "icon": "BarChart3",
       "iconColor": "#5A7A5C",
-      "libraries": ["Recharts", "Math.js", "React Table"],
-      "features": ["Statistical tests", "Confidence intervals", "Visual comparisons", "Sample size calculator"],
+      "libraries": [
+        "Recharts",
+        "Math.js",
+        "React Table"
+      ],
+      "features": [
+        "Statistical tests",
+        "Confidence intervals",
+        "Visual comparisons",
+        "Sample size calculator"
+      ],
       "date": "October 2023",
-      "tags": ["React", "Statistics", "A/B Testing", "Data Analysis"],
+      "tags": [
+        "React",
+        "Statistics",
+        "A/B Testing",
+        "Data Analysis"
+      ],
       "summary": "A statistical analysis tool for A/B test results featuring automated significance testing, confidence interval calculations, and visual comparisons.",
       "challenge": "Making complex statistical concepts accessible to marketers and product managers without a statistics background.",
       "solution": "Created clear visualizations of statistical concepts, implemented automated test selection based on data characteristics, and provided plain-language explanations of results.",
@@ -149,16 +264,126 @@
         "Power analysis tools",
         "Export results in presentation-ready format"
       ],
-      "technologies": ["React", "Math.js", "Recharts", "React Table", "jStat"],
+      "technologies": [
+        "React",
+        "Math.js",
+        "Recharts",
+        "React Table",
+        "jStat"
+      ],
       "liveUrl": "#",
       "githubUrl": "#"
+    },
+    {
+      "title": "Tuberculosis Visualization",
+      "slug": "tb-visualizer",
+      "description": "Interactive visualization of tuberculosis prevalence data across different regions and time periods",
+      "category": "visualization",
+      "icon": "AreaChart",
+      "iconColor": "#7D9D7F",
+      "date": "October 2025",
+      "liveUrl": "https://public.tableau.com/views/TB_per_capita/TuberculosisallformsPrevalenceperCapita?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+      "githubUrl": "#",
+      "embedType": "tableau",
+      "embedUrl": "https://public.tableau.com/views/TB_per_capita/TuberculosisallformsPrevalenceperCapita?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+      "embedConfig": {
+        "height": "800px",
+        "width": "100%",
+        "showTabs": true,
+        "showToolbar": true
+      },
+      "features": [
+        "Interactive filtering",
+        "Time series analysis",
+        "Geographic visualization"
+      ],
+      "libraries": [
+        "Tableau"
+      ],
+      "tags": [
+        "Tableau",
+        "Public Health",
+        "Data Visualization"
+      ],
+      "technologies": [
+        "Tableau",
+        "Data Processing"
+      ],
+      "results": [
+        "Visualized TB prevalence across 50+ countries",
+        "Interactive dashboard with multiple views",
+        "Time-based trend analysis"
+      ],
+      "summary": "An interactive Tableau dashboard visualizing tuberculosis prevalence data globally, enabling public health insights through geographic and temporal analysis.",
+      "challenge": "Presenting complex epidemiological data in an accessible format that allows both researchers and the public to understand tuberculosis trends.",
+      "solution": "",
+      "id": 7
+    },
+    {
+      "title": "Accidents Visualization",
+      "slug": "bi-test-visualizer",
+      "description": "Interactive visualization of accidents data across years",
+      "category": "visualization",
+      "icon": "AreaChart",
+      "iconColor": "#7D9D7F",
+      "date": "October 2025",
+      "liveUrl": "https://app.powerbi.com/view?r=eyJrIjoiYzY0ZmFjNjgtOTk1ZC00MmQ0LWE1MzAtOTIxOTZlY2RmOWQ1IiwidCI6ImNmODcxODZlLTYyMWQtNDBjMi1iMmQ0LTFhZWIwMDdiMTFkZSIsImMiOjJ9",
+      "githubUrl": "#",
+      "embedType": "powerbi",
+      "embedUrl": "https://app.powerbi.com/view?r=eyJrIjoiYzY0ZmFjNjgtOTk1ZC00MmQ0LWE1MzAtOTIxOTZlY2RmOWQ1IiwidCI6ImNmODcxODZlLTYyMWQtNDBjMi1iMmQ0LTFhZWIwMDdiMTFkZSIsImMiOjJ9",
+      "embedConfig": {
+        "height": "800px",
+        "width": "100%",
+        "showTabs": true,
+        "showToolbar": true
+      },
+      "features": [
+        "Interactive filtering",
+        "Time series analysis"
+      ],
+      "libraries": [
+        "Power BI"
+      ],
+      "tags": [
+        "Power BI",
+        "Public Health",
+        "Data Visualization"
+      ],
+      "technologies": [
+        "Power BI",
+        "Data Processing"
+      ],
+      "results": [
+        "Visualized accidents data across years",
+        "Interactive dashboard with multiple views",
+        "Time-based trend analysis"
+      ],
+      "summary": "An interactive Power BI dashboard visualizing accidents data over the years, enabling insights through temporal analysis.",
+      "challenge": "Presenting complex accident data in an accessible format that allows both researchers and the public to understand trends.",
+      "solution": "",
+      "id": 8
     }
   ],
   "categories": [
-    { "id": "all", "name": "All Projects" },
-    { "id": "visualization", "name": "Data Visualization" },
-    { "id": "dashboard", "name": "Dashboards" },
-    { "id": "ml", "name": "Machine Learning" },
-    { "id": "analytics", "name": "Analytics Tools" }
+    {
+      "id": "all",
+      "name": "All Projects"
+    },
+    {
+      "id": "visualization",
+      "name": "Data Visualization"
+    },
+    {
+      "id": "dashboard",
+      "name": "Dashboards"
+    },
+    {
+      "id": "ml",
+      "name": "Machine Learning"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics Tools"
+    }
   ]
 }
