@@ -6,13 +6,7 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
-  },
-  ...(isProd
-    ? {
-        basePath: '/nicksal21.github.io',
-        assetPrefix: '/nicksal21.github.io/',
-      }
-    : {}),
+  }
 };
 
 export default nextConfig;
