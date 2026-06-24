@@ -1,11 +1,24 @@
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Tag, ExternalLink, Github } from 'lucide-react';
 import projectsData from '@/data/projects.json';
+import siteData from '@/data/site.json';
 import TableauEmbed from '@/app/components/TableauEmbed.js';
 import PowerBIEmbed from '@/app/components/PowerBIEmbed';
+import FlaskEmbed from '@/app/components/FlaskEmbed';
+
+const embedSectionTitles = {
+  tableau: 'Interactive Dashboard',
+  powerbi: 'Interactive Dashboard',
+  flask: 'Live Application',
+};
 
 export default function ProjectPage({ params }) {
   const project = projectsData.projects.find(p => p.slug === params.slug);
+  const ragDemoUrl = siteData.ragDemoUrl;
+  const embedUrl =
+    project?.embedType === 'flask' && ragDemoUrl ? ragDemoUrl : project?.embedUrl;
+  const liveUrl =
+    project?.embedType === 'flask' && ragDemoUrl ? ragDemoUrl : project?.liveUrl;
 
   if (!project) {
     return (
@@ -67,9 +80,9 @@ export default function ProjectPage({ params }) {
 
           {/* Links */}
           <div className="project-detail-links">
-            {project.liveUrl && project.liveUrl !== '#' && !project.tableauUrl && (
+            {liveUrl && liveUrl !== '#' && !project.tableauUrl && (
               <a
-                href={project.liveUrl}
+                href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="project-detail-link-primary"
@@ -91,25 +104,31 @@ export default function ProjectPage({ params }) {
         </div>
 
         
-            {project.embedType && project.embedUrl && (
+            {project.embedType && embedUrl && (
               <section className="project-detail-section">
                 <h2 className="project-detail-section-title">
-                  Interactive Dashboard
+                  {embedSectionTitles[project.embedType] || 'Interactive Demo'}
                 </h2>
                 <div className="embed-container">
                   {project.embedType === 'tableau' && (
                     <TableauEmbed
-                      url={project.embedUrl}
+                      url={embedUrl}
                       {...(project.embedConfig || {})}
                     />
                   )}
                   {project.embedType === 'powerbi' && (
                     <PowerBIEmbed
-                      url={project.embedUrl}
+                      url={embedUrl}
                       {...(project.embedConfig || {})}
                     />
                   )}
-                  {/* Add more embed types as needed */}
+                  {project.embedType === 'flask' && (
+                    <FlaskEmbed
+                      url={embedUrl}
+                      title={project.title}
+                      {...(project.embedConfig || {})}
+                    />
+                  )}
                 </div>
               </section>
             )}

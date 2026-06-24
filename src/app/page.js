@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from 'react';
-import { BarChart3, LineChart, PieChart, AreaChart, Activity, Layers, TrendingUp, Database, BrainCircuit, BarChartHorizontal, Home, User, Mail, Menu, X, Briefcase } from 'lucide-react';
+import { BarChart3, LineChart, PieChart, AreaChart, Activity, Layers, TrendingUp, Database, BrainCircuit, BarChartHorizontal, Home, User, Mail, Menu, X, Briefcase, Github, Linkedin } from 'lucide-react';
 import projectsData from '@/data/projects.json';
+import siteData from '@/data/site.json';
 
 // Icon mapping
 const iconMap = {
@@ -164,7 +165,7 @@ const DataSciencePortfolio = () => {
       <footer className="site-footer">
         <div className="footer-content">
           <p className="footer-text">
-            © 2024 Nicholas Salazar. Built with Next.js.
+            © 2026 Nicholas Salazar. Built with Next.js.
           </p>
         </div>
       </footer>
@@ -232,7 +233,7 @@ const ProjectsSection = () => {
           Data Science Projects
         </h2>
         <p className="projects-description">
-          Explore these project ideas to build your portfolio and practice your React and data science skills. Each project is designed to showcase different aspects of data analysis and visualization.
+          Selected work with live demos and interactive embeds across data visualization and machine learning.
         </p>
       </div>
       
@@ -311,6 +312,46 @@ const ProjectsSection = () => {
 
 // Contact Section Component
 const ContactSection = () => {
+  const { email, github, linkedin } = siteData.contact;
+  const [formState, setFormState] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setFormState('submitting');
+    setErrorMessage('');
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+          _subject: 'Portfolio contact form',
+          _captcha: 'false',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Unable to send your message right now.');
+      }
+
+      form.reset();
+      setFormState('success');
+    } catch (error) {
+      setFormState('error');
+      setErrorMessage(error.message || 'Something went wrong. Please try again.');
+    }
+  };
+
   return (
     <div>
       {/* Contact Header */}
@@ -319,7 +360,7 @@ const ContactSection = () => {
           Contact Me
         </h2>
         <p className="contact-description">
-          Interested in working together? Feel free to reach out through any of the methods below or fill out the contact form.
+          Interested in working together? Send a message below or connect through email and social links.
         </p>
       </div>
 
@@ -331,45 +372,63 @@ const ContactSection = () => {
             Send a Message
           </h3>
 
-          <form 
-            action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" 
-            method="POST"
-            className="contact-form"
-          >
+          <form onSubmit={handleSubmit} className="contact-form">
             <div className="form-group">
-              <label>Name</label>
-              <input 
-                type="text" 
+              <label htmlFor="contact-name">Name</label>
+              <input
+                id="contact-name"
+                type="text"
                 name="name"
                 className="form-input"
                 placeholder="Your name"
                 required
+                disabled={formState === 'submitting'}
               />
             </div>
 
             <div className="form-group">
-              <label>Email</label>
-              <input 
-                type="email" 
+              <label htmlFor="contact-email">Email</label>
+              <input
+                id="contact-email"
+                type="email"
                 name="email"
                 className="form-input"
                 placeholder="your.email@example.com"
                 required
+                disabled={formState === 'submitting'}
               />
             </div>
 
             <div className="form-group">
-              <label>Message</label>
-              <textarea 
+              <label htmlFor="contact-message">Message</label>
+              <textarea
+                id="contact-message"
                 name="message"
                 className="form-textarea"
                 placeholder="How can I help you?"
                 required
+                disabled={formState === 'submitting'}
               ></textarea>
             </div>
 
-            <button type="submit" className="form-submit">
-              Send Message
+            {formState === 'success' && (
+              <p className="form-feedback form-feedback-success" role="status">
+                Thanks for reaching out. I&apos;ll get back to you soon.
+              </p>
+            )}
+
+            {formState === 'error' && (
+              <p className="form-feedback form-feedback-error" role="alert">
+                {errorMessage}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="form-submit"
+              disabled={formState === 'submitting'}
+            >
+              {formState === 'submitting' ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>
@@ -386,21 +445,39 @@ const ContactSection = () => {
                 <Mail className="contact-info-icon" size={20} />
                 <div>
                   <h4 className="contact-info-label">Email</h4>
-                  <p className="contact-info-text">
-                    contact@datasciportfolio.com
-                  </p>
+                  <a href={`mailto:${email}`} className="contact-info-link">
+                    {email}
+                  </a>
                 </div>
               </div>
 
               <div className="contact-info-item">
-                <User className="contact-info-icon" size={20} />
+                <Github className="contact-info-icon" size={20} />
                 <div>
-                  <h4 className="contact-info-label">Social Media</h4>
-                  <p className="contact-info-text">
-                    LinkedIn: /in/datasci-portfolio<br />
-                    GitHub: @datasci-portfolio<br />
-                    Twitter: @datasci_portfolio
-                  </p>
+                  <h4 className="contact-info-label">GitHub</h4>
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-info-link"
+                  >
+                    github.com/nicksal21
+                  </a>
+                </div>
+              </div>
+
+              <div className="contact-info-item">
+                <Linkedin className="contact-info-icon" size={20} />
+                <div>
+                  <h4 className="contact-info-label">LinkedIn</h4>
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-info-link"
+                  >
+                    linkedin.com/in/nsalazar-2022
+                  </a>
                 </div>
               </div>
             </div>
