@@ -133,10 +133,10 @@
         "OpenAI",
         "Docling"
       ],
-      "liveUrl": "https://construction-rag-pipeline.onrender.com",
+      "liveUrl": "https://fl2023-residential-code-rag-assistant.onrender.com/",
       "githubUrl": "https://github.com/nicksal21/FL2023-Residential-Code-RAG-Assistant",
       "embedType": "flask",
-      "embedUrl": "https://construction-rag-pipeline.onrender.com",
+      "embedUrl": "https://fl2023-residential-code-rag-assistant.onrender.com/",
       "embedConfig": {
         "height": "720px",
         "width": "100%"
