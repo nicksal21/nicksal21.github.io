@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Nicholas Salazar - Data Science Portfolio',
-  description: 'Data Science and Visualization Portfolio',
+  title: 'Nicholas Salazar — AI Engineering & Data Analysis',
+  description: 'Portfolio showcasing AI engineering, data analysis, and visualization projects.',
 }
 
 export default function RootLayout({ children }) {

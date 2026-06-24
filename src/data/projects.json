@@ -111,6 +111,65 @@
       }
     },
     {
+      "id": 5,
+      "slug": "freelance-tracker",
+      "title": "Freelance Work Tracker",
+      "description": "Desktop app for logging freelance hours and earnings, visualizing productivity trends, and estimating self-employment taxes.",
+      "category": "analytics",
+      "icon": "Briefcase",
+      "iconColor": "#6B8E7B",
+      "libraries": [
+        "CustomTkinter",
+        "Matplotlib",
+        "SQLite"
+      ],
+      "features": [
+        "Time and earnings entry management",
+        "Dashboard KPIs and earnings-over-time charts",
+        "Federal and self-employment tax estimator",
+        "Quarterly estimated tax schedule",
+        "Configurable filing status and state"
+      ],
+      "date": "2024",
+      "tags": [
+        "Python",
+        "Desktop App",
+        "SQLite",
+        "Taxes",
+        "Data Visualization"
+      ],
+      "summary": "A Python desktop application for freelancers to track work entries, hours, and pay rates in SQLite, visualize earnings and activity on a dashboard, and estimate federal and self-employment taxes with quarterly payment schedules.",
+      "challenge": "Keeping freelance income, effective hourly rates, and tax obligations in one place without relying on spreadsheets or generic accounting software that does not fit a solo contractor workflow.",
+      "solution": "Built a CustomTkinter desktop UI over a SQLite data layer with SQL-driven aggregates for dashboard KPIs, Matplotlib charts for earnings trends, and a tax module that computes AGI, deductions, self-employment tax, and quarterly estimates from logged entries.",
+      "results": [
+        "All-time earnings, hours, and effective rate at a glance",
+        "Interactive earnings-over-time line charts with period filters",
+        "Tax breakdown with federal vs. self-employment split",
+        "Quarterly estimated tax due dates and amounts"
+      ],
+      "technologies": [
+        "Python",
+        "CustomTkinter",
+        "SQLite",
+        "Matplotlib",
+        "Tkinter"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/nicksal21/wage-tracker",
+      "screenshots": [
+        {
+          "src": "/projects/freelance-tracker/dashboard.png",
+          "alt": "Freelance Tracker dashboard with earnings KPIs and earnings-over-time chart",
+          "caption": "Dashboard — all-time summary with earnings-over-time visualization"
+        },
+        {
+          "src": "/projects/freelance-tracker/tax-estimator.png",
+          "alt": "Tax Estimator showing income summary, tax breakdown donut chart, and quarterly estimates",
+          "caption": "Tax Estimator — AGI, deductions, and quarterly payment schedule"
+        }
+      ]
+    },
+    {
       "title": "Tuberculosis Visualization",
       "slug": "tb-visualizer",
       "description": "Interactive visualization of tuberculosis prevalence data across different regions and time periods",
@@ -212,6 +271,10 @@
     {
       "id": "ml",
       "name": "Machine Learning"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics Tools"
     }
   ]
 }

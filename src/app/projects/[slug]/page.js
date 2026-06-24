@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, Calendar, Tag, ExternalLink, Github } from 'lucide-react';
 import projectsData from '@/data/projects.json';
 import siteData from '@/data/site.json';
@@ -144,6 +145,32 @@ export default function ProjectPage({ params }) {
               {project.summary}
             </p>
           </section>
+
+          {project.screenshots?.length > 0 && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">
+                Screenshots
+              </h2>
+              <div className="project-screenshots">
+                {project.screenshots.map((shot, index) => (
+                  <figure key={index} className="project-screenshot">
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      width={1200}
+                      height={750}
+                      className="project-screenshot-image"
+                    />
+                    {shot.caption && (
+                      <figcaption className="project-screenshot-caption">
+                        {shot.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Tableau Embed - Show early if it's a Tableau project */}
           {isTableauProject && project.tableauUrl && (

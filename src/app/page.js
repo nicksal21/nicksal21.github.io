@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from 'react';
 import { BarChart3, LineChart, PieChart, AreaChart, Activity, Layers, TrendingUp, Database, BrainCircuit, BarChartHorizontal, Home, User, Mail, Menu, X, Briefcase, Github, Linkedin } from 'lucide-react';
@@ -14,7 +13,8 @@ const iconMap = {
   BrainCircuit: BrainCircuit,
   TrendingUp: TrendingUp,
   AreaChart: AreaChart,
-  BarChart3: BarChart3
+  BarChart3: BarChart3,
+  Briefcase: Briefcase,
 };
 
 // Portfolio App
@@ -89,10 +89,7 @@ const DataSciencePortfolio = () => {
         <div className="header-content">
           {/* Logo */}
           <button onClick={() => scrollToSection('about')} className="logo-button">
-            <div className="logo-icon">
-              <BarChart3 size={24} color="white" />
-            </div>
-            <h1 className="logo-text">Nicholas Salazar&apos;s DataSci Portfolio</h1>
+            <h1 className="logo-text">Nicholas Salazar — AI Engineering & Data Analysis</h1>
           </button>
 
           {/* Desktop Navigation */}
@@ -190,7 +187,7 @@ const AboutSection = ({ isMobile }) => {
           Hi, I&apos;m Nicholas Salazar
         </h2>
         <p className="about-paragraph">
-          I&apos;m a data scientist and web developer passionate about creating interactive data experiences. I specialize in building applications that make complex data accessible and actionable.
+          I&apos;m an AI engineer and data analyst passionate about building intelligent applications and interactive data experiences. I specialize in RAG pipelines, applied machine learning, and tools that make complex data accessible and actionable.
         </p>
         <p className="about-paragraph">
           With a background in both computer science and statistics, I bridge the gap between robust analysis and user-friendly interfaces. I&apos;m particularly interested in visualization techniques that reveal patterns and insights in large datasets.
