@@ -362,6 +362,53 @@
       "challenge": "Presenting complex accident data in an accessible format that allows both researchers and the public to understand trends.",
       "solution": "",
       "id": 8
+    },
+    {
+      "id": 9,
+      "slug": "construction-rag-pipeline",
+      "title": "Construction Document RAG Pipeline",
+      "description": "Flask-based RAG demo that retrieves context from sample construction reference docs and generates grounded answers with LangChain and OpenAI.",
+      "category": "ml",
+      "icon": "BrainCircuit",
+      "iconColor": "#5A7A5C",
+      "libraries": [
+        "LangChain",
+        "OpenAI",
+        "Flask",
+        "Docling"
+      ],
+      "features": [
+        "Markdown header chunking",
+        "Vector similarity retrieval",
+        "Context-grounded generation",
+        "Sample reference corpus (no copyrighted PDFs)"
+      ],
+      "date": "June 2025",
+      "tags": [
+        "Python",
+        "Flask",
+        "RAG",
+        "LangChain",
+        "OpenAI"
+      ],
+      "summary": "A retrieval-augmented generation pipeline that answers construction-domain questions using chunked markdown documents, OpenAI embeddings, and a Flask web interface. Originally prototyped against building code PDFs; the public version uses original sample reference material to avoid redistributing copyrighted publications.",
+      "challenge": "Demonstrating a realistic RAG architecture without publishing proprietary building code documents, while keeping the demo useful enough to show retrieval quality and source citation behavior.",
+      "solution": "Reframed the project as an architecture demo with original sample markdown in foundations, framing, and electrical/safety topics. Kept doc_parser.py as an optional local tool for developers to convert their own licensed PDFs, with gitignored directories for private ingestion.",
+      "results": [
+        "End-to-end RAG flow: chunk → embed → retrieve → generate",
+        "Header-aware markdown splitting with source metadata",
+        "Copyright-safe public demo corpus",
+        "Deployable Flask app with gunicorn support"
+      ],
+      "technologies": [
+        "Python",
+        "Flask",
+        "LangChain",
+        "OpenAI",
+        "Docling"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/nicksal21/FL2023-Residential-Code-RAG-Assistant"
     }
   ],
   "categories": [
