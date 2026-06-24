@@ -93,7 +93,7 @@
       "id": 3,
       "slug": "construction-rag-pipeline",
       "title": "Construction Document RAG Pipeline",
-      "description": "Flask-based RAG demo that retrieves context from sample construction reference docs and generates grounded answers with LangChain and OpenAI.",
+      "description": "Flask-based RAG demo over 2023 Florida Residential Building Code markdown chapters with LangChain and OpenAI.",
       "category": "ml",
       "icon": "BrainCircuit",
       "iconColor": "#5A7A5C",
@@ -107,7 +107,8 @@
         "Markdown header chunking",
         "Vector similarity retrieval",
         "Context-grounded generation",
-        "Sample reference corpus (no copyrighted PDFs)"
+        "2023 Florida Residential Code markdown corpus",
+        "Bring-your-own OpenAI API key"
       ],
       "date": "June 2025",
       "tags": [
@@ -117,14 +118,14 @@
         "LangChain",
         "OpenAI"
       ],
-      "summary": "A retrieval-augmented generation pipeline that answers construction-domain questions using chunked markdown documents, OpenAI embeddings, and a Flask web interface. Originally prototyped against building code PDFs; the public version uses original sample reference material to avoid redistributing copyrighted publications.",
-      "challenge": "Demonstrating a realistic RAG architecture without publishing proprietary building code documents, while keeping the demo useful enough to show retrieval quality and source citation behavior.",
-      "solution": "Reframed the project as an architecture demo with original sample markdown in foundations, framing, and electrical/safety topics. Kept doc_parser.py as an optional local tool for developers to convert their own licensed PDFs, with gitignored directories for private ingestion.",
+      "summary": "A retrieval-augmented generation pipeline that answers questions about the 2023 Florida Residential Building Code using Docling-converted markdown chapters, OpenAI embeddings, and a Flask web interface hosted on Render.",
+      "challenge": "Building a useful code assistant from PDF-derived markdown where tables and figures do not always convert cleanly, while keeping deployment costs off the portfolio owner via bring-your-own-key inference.",
+      "solution": "Converted code chapters to markdown with Docling, chunked by headers for retrieval, and deployed a Flask app that embeds in the portfolio. Visitors supply their own OpenAI API key for embeddings and generation.",
       "results": [
         "End-to-end RAG flow: chunk → embed → retrieve → generate",
-        "Header-aware markdown splitting with source metadata",
-        "Copyright-safe public demo corpus",
-        "Deployable Flask app with gunicorn support"
+        "46 residential code chapters indexed for retrieval",
+        "Live demo embedded in portfolio via Render",
+        "Bring-your-own-key hosting model"
       ],
       "technologies": [
         "Python",
@@ -133,10 +134,10 @@
         "OpenAI",
         "Docling"
       ],
-      "liveUrl": "https://fl2023-residential-code-rag-assistant.onrender.com/",
+      "liveUrl": "https://fl2023-residential-code-rag-assistant.onrender.com",
       "githubUrl": "https://github.com/nicksal21/FL2023-Residential-Code-RAG-Assistant",
       "embedType": "flask",
-      "embedUrl": "https://fl2023-residential-code-rag-assistant.onrender.com/",
+      "embedUrl": "https://fl2023-residential-code-rag-assistant.onrender.com",
       "embedConfig": {
         "height": "720px",
         "width": "100%"
