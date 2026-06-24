@@ -10,15 +10,15 @@ const embedSectionTitles = {
   tableau: 'Interactive Dashboard',
   powerbi: 'Interactive Dashboard',
   flask: 'Live Application',
+  render: 'Live Application',
 };
 
 export default function ProjectPage({ params }) {
   const project = projectsData.projects.find(p => p.slug === params.slug);
   const ragDemoUrl = siteData.ragDemoUrl;
-  const embedUrl =
-    project?.embedType === 'flask' && ragDemoUrl ? ragDemoUrl : project?.embedUrl;
-  const liveUrl =
-    project?.embedType === 'flask' && ragDemoUrl ? ragDemoUrl : project?.liveUrl;
+  const isRagProject = project?.slug === 'construction-rag-pipeline';
+  const embedUrl = isRagProject && ragDemoUrl ? ragDemoUrl : project?.embedUrl;
+  const liveUrl = isRagProject && ragDemoUrl ? ragDemoUrl : project?.liveUrl;
 
   if (!project) {
     return (
@@ -122,7 +122,7 @@ export default function ProjectPage({ params }) {
                       {...(project.embedConfig || {})}
                     />
                   )}
-                  {project.embedType === 'flask' && (
+                  {(project.embedType === 'flask' || project.embedType === 'render') && (
                     <FlaskEmbed
                       url={embedUrl}
                       title={project.title}

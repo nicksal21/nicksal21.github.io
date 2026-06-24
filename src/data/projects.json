@@ -1,6 +1,116 @@
 {
   "projects": [
     {
+      "id": 4,
+      "slug": "nexrad-weather-pro",
+      "title": "NEXRAD Radar Pro",
+      "description": "Full-stack NEXRAD Level II radar viewer with multi-layer reflectivity, velocity, and spectral width maps plus AI storm analysis.",
+      "category": "visualization",
+      "icon": "Layers",
+      "iconColor": "#4A7C9E",
+      "libraries": [
+        "React",
+        "Leaflet",
+        "Google Gemini",
+        "Express"
+      ],
+      "features": [
+        "Real-time NEXRAD Level II data from AWS S3",
+        "Reflectivity, velocity, and spectral width layers",
+        "Animated radar loops with playback controls",
+        "AI-powered storm tracking and interpretation",
+        "Bring-your-own Gemini API key"
+      ],
+      "date": "June 2026",
+      "tags": [
+        "React",
+        "TypeScript",
+        "NEXRAD",
+        "Meteorology",
+        "Google Gemini"
+      ],
+      "summary": "An advanced meteorological analysis app that fetches live NEXRAD Level II radar from AWS S3, renders interactive Leaflet maps with reflectivity, velocity, and spectral width layers, and uses Google Gemini for AI-powered storm tracking insights.",
+      "challenge": "Turning raw NEXRAD Level II binary data into responsive, multi-layer radar visualizations with smooth animation loops, while keeping AI inference costs off the portfolio owner via bring-your-own-key access.",
+      "solution": "Built an Express API that parses Level II archives with nexrad-level-2-data, generates map overlays with Sharp, and serves a React + Leaflet frontend. Visitors supply their own Gemini API key for geocoding and storm analysis.",
+      "results": [
+        "End-to-end radar pipeline: S3 fetch → Level II parse → map overlay → interactive loop",
+        "Multi-layer visualization across reflectivity, velocity, and spectral width",
+        "Station ID search without an API key; city and zip search with Gemini geocoding",
+        "Live demo embedded in portfolio via Render"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Express",
+        "Leaflet",
+        "Google Gemini",
+        "nexrad-level-2-data",
+        "Vite"
+      ],
+      "liveUrl": "https://nexrad-weather-pro.onrender.com/",
+      "githubUrl": "https://github.com/nicksal21/nexrad-weather-pro",
+      "embedType": "render",
+      "embedUrl": "https://nexrad-weather-pro.onrender.com/",
+      "embedConfig": {
+        "height": "800px",
+        "width": "100%"
+      }
+    },
+    {
+      "id": 3,
+      "slug": "construction-rag-pipeline",
+      "title": "Construction Document RAG Pipeline",
+      "description": "Flask-based RAG demo over 2023 Florida Residential Building Code markdown chapters with LangChain and OpenAI.",
+      "category": "ml",
+      "icon": "BrainCircuit",
+      "iconColor": "#5A7A5C",
+      "libraries": [
+        "LangChain",
+        "OpenAI",
+        "Flask",
+        "Docling"
+      ],
+      "features": [
+        "Markdown header chunking",
+        "Vector similarity retrieval",
+        "Context-grounded generation",
+        "2023 Florida Residential Code markdown corpus",
+        "Bring-your-own OpenAI API key"
+      ],
+      "date": "June 2025",
+      "tags": [
+        "Python",
+        "Flask",
+        "RAG",
+        "LangChain",
+        "OpenAI"
+      ],
+      "summary": "A retrieval-augmented generation pipeline that answers questions about the 2023 Florida Residential Building Code using Docling-converted markdown chapters, OpenAI embeddings, and a Flask web interface hosted on Render.",
+      "challenge": "Building a useful code assistant from PDF-derived markdown where tables and figures do not always convert cleanly, while keeping deployment costs off the portfolio owner via bring-your-own-key inference.",
+      "solution": "Converted code chapters to markdown with Docling, chunked by headers for retrieval, and deployed a Flask app that embeds in the portfolio. Visitors supply their own OpenAI API key for embeddings and generation.",
+      "results": [
+        "End-to-end RAG flow: chunk → embed → retrieve → generate",
+        "46 residential code chapters indexed for retrieval",
+        "Live demo embedded in portfolio via Render",
+        "Bring-your-own-key hosting model"
+      ],
+      "technologies": [
+        "Python",
+        "Flask",
+        "LangChain",
+        "OpenAI",
+        "Docling"
+      ],
+      "liveUrl": "https://fl2023-residential-code-rag-assistant.onrender.com",
+      "githubUrl": "https://github.com/nicksal21/FL2023-Residential-Code-RAG-Assistant",
+      "embedType": "flask",
+      "embedUrl": "https://fl2023-residential-code-rag-assistant.onrender.com",
+      "embedConfig": {
+        "height": "720px",
+        "width": "100%"
+      }
+    },
+    {
       "title": "Tuberculosis Visualization",
       "slug": "tb-visualizer",
       "description": "Interactive visualization of tuberculosis prevalence data across different regions and time periods",
@@ -88,110 +198,6 @@
       "challenge": "Presenting complex accident data in an accessible format that allows both researchers and the public to understand trends.",
       "solution": "",
       "id": 2
-    },
-    {
-      "id": 3,
-      "slug": "construction-rag-pipeline",
-      "title": "Construction Document RAG Pipeline",
-      "description": "Flask-based RAG demo over 2023 Florida Residential Building Code markdown chapters with LangChain and OpenAI.",
-      "category": "ml",
-      "icon": "BrainCircuit",
-      "iconColor": "#5A7A5C",
-      "libraries": [
-        "LangChain",
-        "OpenAI",
-        "Flask",
-        "Docling"
-      ],
-      "features": [
-        "Markdown header chunking",
-        "Vector similarity retrieval",
-        "Context-grounded generation",
-        "2023 Florida Residential Code markdown corpus",
-        "Bring-your-own OpenAI API key"
-      ],
-      "date": "June 2025",
-      "tags": [
-        "Python",
-        "Flask",
-        "RAG",
-        "LangChain",
-        "OpenAI"
-      ],
-      "summary": "A retrieval-augmented generation pipeline that answers questions about the 2023 Florida Residential Building Code using Docling-converted markdown chapters, OpenAI embeddings, and a Flask web interface hosted on Render.",
-      "challenge": "Building a useful code assistant from PDF-derived markdown where tables and figures do not always convert cleanly, while keeping deployment costs off the portfolio owner via bring-your-own-key inference.",
-      "solution": "Converted code chapters to markdown with Docling, chunked by headers for retrieval, and deployed a Flask app that embeds in the portfolio. Visitors supply their own OpenAI API key for embeddings and generation.",
-      "results": [
-        "End-to-end RAG flow: chunk → embed → retrieve → generate",
-        "46 residential code chapters indexed for retrieval",
-        "Live demo embedded in portfolio via Render",
-        "Bring-your-own-key hosting model"
-      ],
-      "technologies": [
-        "Python",
-        "Flask",
-        "LangChain",
-        "OpenAI",
-        "Docling"
-      ],
-      "liveUrl": "https://fl2023-residential-code-rag-assistant.onrender.com",
-      "githubUrl": "https://github.com/nicksal21/FL2023-Residential-Code-RAG-Assistant",
-      "embedType": "flask",
-      "embedUrl": "https://fl2023-residential-code-rag-assistant.onrender.com",
-      "embedConfig": {
-        "height": "720px",
-        "width": "100%"
-      }
-    },
-    {
-      "id": 4,
-      "slug": "nexrad-weather-pro",
-      "title": "NEXRAD Radar Pro",
-      "description": "Full-stack NEXRAD Level II radar viewer with multi-layer reflectivity, velocity, and spectral width maps plus AI storm analysis.",
-      "category": "visualization",
-      "icon": "Layers",
-      "iconColor": "#4A7C9E",
-      "libraries": [
-        "React",
-        "Leaflet",
-        "Google Gemini",
-        "Express"
-      ],
-      "features": [
-        "Real-time NEXRAD Level II data from AWS S3",
-        "Reflectivity, velocity, and spectral width layers",
-        "Animated radar loops with playback controls",
-        "AI-powered storm tracking and interpretation",
-        "Bring-your-own Gemini API key"
-      ],
-      "date": "June 2026",
-      "tags": [
-        "React",
-        "TypeScript",
-        "NEXRAD",
-        "Meteorology",
-        "Google Gemini"
-      ],
-      "summary": "An advanced meteorological analysis app that fetches live NEXRAD Level II radar from AWS S3, renders interactive Leaflet maps with reflectivity, velocity, and spectral width layers, and uses Google Gemini for AI-powered storm tracking insights.",
-      "challenge": "Turning raw NEXRAD Level II binary data into responsive, multi-layer radar visualizations with smooth animation loops, while keeping AI inference costs off the portfolio owner via bring-your-own-key access.",
-      "solution": "Built an Express API that parses Level II archives with nexrad-level-2-data, generates map overlays with Sharp, and serves a React + Leaflet frontend. Visitors supply their own Gemini API key for geocoding and storm analysis.",
-      "results": [
-        "End-to-end radar pipeline: S3 fetch → Level II parse → map overlay → interactive loop",
-        "Multi-layer visualization across reflectivity, velocity, and spectral width",
-        "Station ID search without an API key; city and zip search with Gemini geocoding",
-        "Live demo hosted on Google AI Studio"
-      ],
-      "technologies": [
-        "React",
-        "TypeScript",
-        "Express",
-        "Leaflet",
-        "Google Gemini",
-        "nexrad-level-2-data",
-        "Vite"
-      ],
-      "liveUrl": "https://ai.studio/apps/5e1d4b25-2a39-4cef-8880-671acc9fc76a",
-      "githubUrl": "https://github.com/nicksal21/nexrad-weather-pro"
     }
   ],
   "categories": [
