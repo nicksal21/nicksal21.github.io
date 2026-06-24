@@ -142,6 +142,56 @@
         "height": "720px",
         "width": "100%"
       }
+    },
+    {
+      "id": 4,
+      "slug": "nexrad-weather-pro",
+      "title": "NEXRAD Radar Pro",
+      "description": "Full-stack NEXRAD Level II radar viewer with multi-layer reflectivity, velocity, and spectral width maps plus AI storm analysis.",
+      "category": "visualization",
+      "icon": "Layers",
+      "iconColor": "#4A7C9E",
+      "libraries": [
+        "React",
+        "Leaflet",
+        "Google Gemini",
+        "Express"
+      ],
+      "features": [
+        "Real-time NEXRAD Level II data from AWS S3",
+        "Reflectivity, velocity, and spectral width layers",
+        "Animated radar loops with playback controls",
+        "AI-powered storm tracking and interpretation",
+        "Bring-your-own Gemini API key"
+      ],
+      "date": "June 2026",
+      "tags": [
+        "React",
+        "TypeScript",
+        "NEXRAD",
+        "Meteorology",
+        "Google Gemini"
+      ],
+      "summary": "An advanced meteorological analysis app that fetches live NEXRAD Level II radar from AWS S3, renders interactive Leaflet maps with reflectivity, velocity, and spectral width layers, and uses Google Gemini for AI-powered storm tracking insights.",
+      "challenge": "Turning raw NEXRAD Level II binary data into responsive, multi-layer radar visualizations with smooth animation loops, while keeping AI inference costs off the portfolio owner via bring-your-own-key access.",
+      "solution": "Built an Express API that parses Level II archives with nexrad-level-2-data, generates map overlays with Sharp, and serves a React + Leaflet frontend. Visitors supply their own Gemini API key for geocoding and storm analysis.",
+      "results": [
+        "End-to-end radar pipeline: S3 fetch → Level II parse → map overlay → interactive loop",
+        "Multi-layer visualization across reflectivity, velocity, and spectral width",
+        "Station ID search without an API key; city and zip search with Gemini geocoding",
+        "Live demo hosted on Google AI Studio"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Express",
+        "Leaflet",
+        "Google Gemini",
+        "nexrad-level-2-data",
+        "Vite"
+      ],
+      "liveUrl": "https://ai.studio/apps/5e1d4b25-2a39-4cef-8880-671acc9fc76a",
+      "githubUrl": "https://github.com/nicksal21/nexrad-weather-pro"
     }
   ],
   "categories": [
