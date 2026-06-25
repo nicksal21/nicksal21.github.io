@@ -77,7 +77,7 @@
         "2023 Florida Residential Code markdown corpus",
         "Bring-your-own OpenAI API key"
       ],
-      "date": "June 2025",
+      "date": "June 2026",
       "tags": [
         "Python",
         "Flask",
@@ -130,7 +130,7 @@
         "Quarterly estimated tax schedule",
         "Configurable filing status and state"
       ],
-      "date": "2024",
+      "date": "May 2026",
       "tags": [
         "Python",
         "Desktop App",
