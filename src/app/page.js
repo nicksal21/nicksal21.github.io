@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import { BarChart3, LineChart, PieChart, AreaChart, Activity, Layers, TrendingUp, Database, BrainCircuit, BarChartHorizontal, Home, User, Mail, Menu, X, Briefcase, Github, Linkedin } from 'lucide-react';
 import projectsData from '@/data/projects.json';
@@ -177,7 +178,14 @@ const AboutSection = ({ isMobile }) => {
       {/* Profile Image */}
       <div className="about-image-wrapper">
         <div className="about-image">
-          <User size={120} color="white" style={{ opacity: 0.9 }} />
+          <Image
+            src="/profile-photo.png"
+            alt="Nicholas Salazar"
+            width={280}
+            height={280}
+            className="about-image-photo"
+            priority
+          />
         </div>
       </div>
 
